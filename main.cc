@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-color ray_color(const ray& r, const hittable& world, int depth) {
+static color ray_color(const ray& r, const hittable& world, int depth) {
     hit_record rec;
 
     if (depth <= 0) {
@@ -14,7 +14,12 @@ color ray_color(const ray& r, const hittable& world, int depth) {
     }
 
     if (world.hit(r, 0.001, infinity, rec)) {
+        #if 0
+        // Lambertian diffuse
         point3 s = rec.p + rec.normal + random_unit_vector();
+        #else
+        point3 s = rec.p + random_in_hemisphere(rec.normal);
+        #endif
         return 0.5 * ray_color(ray(rec.p, s - rec.p), world, depth-1);
     }
 
