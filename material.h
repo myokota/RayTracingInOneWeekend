@@ -1,7 +1,7 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-#include "common.h"
+#include "rtweekend.h"
 
 struct hit_record;
 
